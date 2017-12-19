@@ -90,11 +90,12 @@
                     if (oldVal && oldVal.length && oldVal.length > curVal.length) {
                         for (checkVal(!0); pos.begin > 0 && !tests[pos.begin - 1]; ) pos.begin--;
                         if (0 === pos.begin) for (;pos.begin < firstNonMaskPos && !tests[pos.begin]; ) pos.begin++;
-                        input.caret(pos.begin, pos.begin);
                     } else {
                         for (checkVal(!0); pos.begin < len && !tests[pos.begin]; ) pos.begin++;
-                        input.caret(pos.begin, pos.begin);
                     }
+                    setTimout(function() {
+                        input.caret(pos.begin, pos.begin);
+                    });
                     tryFireCompleted();
                 }
                 function blurEvent() {

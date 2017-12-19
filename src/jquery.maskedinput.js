@@ -211,9 +211,7 @@ $.fn.extend({
 						while (pos.begin < firstNonMaskPos && !tests[pos.begin])
 							pos.begin++;
 					}
-					input.caret(pos.begin,pos.begin);
 				} else {
-					var pos2 = checkVal(true);
 					var lastEnteredValue = curVal.charAt(pos.begin);
 					if (pos.begin < len){
 						if(!tests[pos.begin]){
@@ -227,8 +225,10 @@ $.fn.extend({
 							}
 						}
 					}
-					input.caret(pos.begin,pos.begin);
 				}
+				setTimeout(function() {
+					input.caret(pos.begin);
+				})
 				tryFireCompleted();
 			}
 
