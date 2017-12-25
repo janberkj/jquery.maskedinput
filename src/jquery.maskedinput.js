@@ -203,7 +203,6 @@ $.fn.extend({
 				var pos = input.caret();
 				if (oldVal && oldVal.length && oldVal.length > curVal.length ) {
 					// a deletion or backspace happened
-					checkVal(true);
 					while (pos.begin > 0 && !tests[pos.begin-1])
 						pos.begin--;
 					if (pos.begin === 0)
@@ -212,19 +211,7 @@ $.fn.extend({
 							pos.begin++;
 					}
 				} else {
-					var lastEnteredValue = curVal.charAt(pos.begin);
-					if (pos.begin < len){
-						if(!tests[pos.begin]){
-							pos.begin++;
-							if(tests[pos.begin].test(lastEnteredValue)){
-								pos.begin++;
-							}
-						}else{
-							if(tests[pos.begin].test(lastEnteredValue)){
-								pos.begin++;
-							}
-						}
-					}
+					pos.begin = checkVal();
 				}
 				setTimeout(function() {
 					input.caret(pos.begin);
